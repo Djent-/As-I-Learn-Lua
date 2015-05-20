@@ -66,14 +66,29 @@ function monster.totalAttributes(self)
 	return atr
 end
 
+function monster.equip(self, equipment)
+	if not equipment then return end
+	self.slots[equipment.slot] = equipment
+end
+
 ring = {}
 
 --ring constructor
 function ring.new(attributes, name)
-	local self = ring
+	--extends equipable
+	local self = equipable.new("ring")
 	--self.list = ring.list
 	self.attributes = attributes
 	self.name = name
+	return self
+end
+
+equipable = {}
+
+--constructor for the equipable class
+function equipable.new(slot)
+	local self = equipable
+	self.slot = slot
 	return self
 end
 
