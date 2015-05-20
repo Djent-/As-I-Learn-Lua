@@ -1,0 +1,96 @@
+--created 2015.05.20
+--creator [redacted]
+--modified 2015.05.20
+--modifiers [redacted]
+
+require("os")
+
+monster = {}
+
+function monster.new(attributes, name)
+	local self = monster
+	self.list = monster.list
+	self.name = name
+	self.attributes = attributes
+	self.slots = {}
+	return self
+end
+
+function monster.list(self)
+	for k,v in next, self.attributes do
+		print(k .. "=" .. self.attributes[k])
+	end
+end
+
+function monster.putRing(self, ring)
+	self.slots.ring = ring
+end
+
+function monster.totalAttributes(self)
+	local atr = {attributes = {}}
+	--cycle through the monster's stats
+	for k, v in next, self.attributes do
+		--cycle through the monster's slots
+		for k2, v2 in next, self.slots do
+			--cycle through each slot's attributes
+			for k3, v3 in next, self.slots[k2].attributes do
+				--if the slot has an attribute, add it to
+				--the monster's base attribute
+				if self.slots[k2][k] then
+					atr.attributes[k] = v + v3
+				end
+			end
+		end
+	end
+	--cycle through the monster's slots
+	for k, v in next, self.slots do
+		--cycle through each slot's attributes
+		for k2, v2 in next, self.slots[k].attributes do
+			--if the attribute is not present in the local count,
+			--add it to the local count
+			if not atr.attributes[k2] then
+				atr.attributes[k2] = v2
+			end
+		end
+	end
+	
+	--cycle through the monster's attributes
+	for k, v in next, self.attributes do
+		--if the attribute is not present in the local count
+		--add it to the local count
+		if not atr.attributes[k] then
+			atr.attributes[k] = v
+		end
+	end
+	
+	return atr
+end
+
+ring = {}
+
+--ring constructor
+function ring.new(attributes, name)
+	local self = ring
+	--self.list = ring.list
+	self.attributes = attributes
+	self.name = name
+	return self
+end
+
+--generic list for any object with an attributes table
+function list(self)
+	for k,v in next, self.attributes do
+		print(k .. "=" .. self.attributes[k])
+	end
+end
+
+m1 = monster.new({str = 1, def = 2}, "M1")
+monster.list(m1)
+print()
+
+r1 = ring.new({psnr = 2, cldr = 1, str = 3}, "R1")
+m1:putRing(r1)
+a = m1:totalAttributes()
+list(a)
+
+os.execute("pause")
