@@ -22,10 +22,6 @@ function monster.list(self)
 	end
 end
 
-function monster.putRing(self, ring)
-	self.slots.ring = ring
-end
-
 function monster.totalAttributes(self)
 	local atr = {attributes = {}}
 	--cycle through the monster's stats
@@ -77,14 +73,12 @@ ring = {}
 function ring.new(attributes, name)
 	--extends equipable
 	local self = equipable.new("ring")
-	--self.list = ring.list
 	self.attributes = attributes
 	self.name = name
 	return self
 end
 
 equipable = {}
-
 --constructor for the equipable class
 function equipable.new(slot)
 	local self = equipable
@@ -99,12 +93,34 @@ function list(self)
 	end
 end
 
+state = {}
+--state constructor
+function state.new(name)
+	local self = state
+	self.name = name
+	self.model = {}
+	self.view = {}
+	self.controller = {}
+	return self
+end
+
+welcomescreen = state.new("Welcome")
+welcomescreen.controller.start = function()
+		welcomescreen.view.printwelcome()
+	end
+welcomescreen.view.printwelcome = function()
+		print("Welcome to experiment #1")
+		print("I am testing a new (to me) way of")
+		print("handling states and iterating over")
+		print("object attributes.")
+	end
+
 m1 = monster.new({str = 1, def = 2}, "M1")
 monster.list(m1)
 print()
 
 r1 = ring.new({psnr = 2, cldr = 1, str = 3}, "R1")
-m1:putRing(r1)
+m1:equip(r1)
 a = m1:totalAttributes()
 list(a)
 
