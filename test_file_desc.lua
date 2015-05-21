@@ -21,12 +21,14 @@ function check(var, vtype)
 end
 
 --open or create file
-datafile = io.open("test_file_desc.DATA", "r")
+--"r" cannot create file, "w" can create file
+datafile = io.open("test_file_desc.DATA", "w")
 
 --assemble data table from file
 data = {}
 --iterate over lines in datafile
 tdatatable = {filename = nil, attributes = {}} --temporary data table
+--this will throw "No error" if the file is empty
 for line in datafile:lines() do
 	--don't know how I will store the data within the file
 	--if the line contains the filename
