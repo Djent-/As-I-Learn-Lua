@@ -4,6 +4,7 @@
 --modifiers: [redacted]
 
 require("os")
+require("io")
 
 --this needs to go at the beginning of the file
 --basic assert helper function
@@ -17,9 +18,14 @@ function check(var, vtype)
 end
 
 --open or create file
+datafile = io.open("DATA.DATA", "w")
 
 --assemble data table from file
-data = {} --temporary
+data = {}
+--iterate over lines in datafile
+for line in datafile:lines() do
+	--
+end
 
 --parse command-line argument
 validargs = {}
@@ -90,6 +96,8 @@ validargs.display = function()
 			end
 		end
 		--loop through the attributes and print them
+		--this may need to be changed for easier access
+			--piping into other programs
 		for x = 1, #data[found].attributes do
 			print(data[found].filename, data[found].attributes[x])
 		end
@@ -116,3 +124,6 @@ if not argfound then
 end
 	
 --write data table to file
+
+--close file
+datafile:close()
