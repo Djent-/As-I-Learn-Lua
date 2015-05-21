@@ -5,6 +5,12 @@
 --Written on Lua 5.1.4
 --Copyright 2015, all rights reserved.
 
+--TODO: display by attribute - show all tracked files
+--TODO: check whether file exists or not
+--TODO: store file path along with file name
+--TODO: allow renaming of files
+--TODO: copy all files with an attribute to a new folder
+
 require("os")
 require("io")
 require("string")
