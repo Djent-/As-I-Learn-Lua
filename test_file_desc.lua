@@ -3,6 +3,7 @@
 --date modified: 2015.05.20, 2015.05.21
 --modifiers: [redacted]
 --Written on Lua 5.1.4
+--Copyright 2015, all rights reserved.
 
 require("os")
 require("io")
