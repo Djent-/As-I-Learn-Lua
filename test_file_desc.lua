@@ -21,7 +21,7 @@ function check(var, vtype)
 end
 
 --open or create file
-datafile = io.open("DATA.DATA", "r")
+datafile = io.open("test_file_desc.DATA", "r")
 
 --assemble data table from file
 data = {}
@@ -148,6 +148,14 @@ validargs.display = function()
 validargs.clear = function()
 		data = {}
 	end
+validargs.help = function()
+		print("test_file_desc.lua usage:")
+		print("test_file_desc.lua track filename.ext")
+		print("test_file_desc.lua untrack filename.ext")
+		print("test_file_desc.lua assign filename.ext attribute")
+		print("test_file_desc.lua display filename.ext")
+		print("test_file_desc.lua clear")
+	end
 
 --parse the commandline arguments
 if not arg[1] then
@@ -156,6 +164,7 @@ if not arg[1] then
 end
 argfound = false
 for k, v in next, validargs do
+	--optional TODO: allow/remove "-" from arguments/flags
 	if arg[1] == k then
 		--run the command
 		validargs[k]()
@@ -170,7 +179,7 @@ if not argfound then
 end
 	
 --write data table to file
-datafile = io.open("DATA.DATA", "w+")
+datafile = io.open("test_file_desc.DATA", "w+")
 --iterate over the data
 for x = 1, #data do
 	datafile:write("FILENAME" .. data[x].filename .. "\n")
