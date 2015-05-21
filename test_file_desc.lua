@@ -1,7 +1,8 @@
 --date created: 2015.05.20
 --creator: [redacted]
---date modified: 2015.05.20
+--date modified: 2015.05.20, 2015.05.21
 --modifiers: [redacted]
+--Written on Lua 5.1.4
 
 require("os")
 require("io")
